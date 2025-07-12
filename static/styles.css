@@ -13,6 +13,25 @@
     --warning-color: #000000;
     --error-color: #000000;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --toggle-bg: #cccccc;
+    --toggle-slider: #ffffff;
+}
+
+[data-theme="dark"] {
+    --primary-color: #ffffff;
+    --secondary-color: #cccccc;
+    --accent-color: #999999;
+    --bg-color: #000000;
+    --surface-color: #0a0a0a;
+    --text-color: #ffffff;
+    --text-secondary: #999999;
+    --border-color: #333333;
+    --success-color: #ffffff;
+    --warning-color: #ffffff;
+    --error-color: #ffffff;
+    --shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+    --toggle-bg: #333333;
+    --toggle-slider: #000000;
 }
 
 * {
@@ -30,6 +49,49 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toggle-switch {
+    display: none;
+}
+
+.toggle-label {
+    display: block;
+    width: 40px;
+    height: 20px;
+    background: var(--toggle-bg);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 16px;
+    height: 16px;
+    background: var(--toggle-slider);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.toggle-switch:checked + .toggle-label .toggle-slider {
+    transform: translateX(18px);
+}
+
+.toggle-label:hover {
+    opacity: 0.8;
 }
 
 .screen {
@@ -64,12 +126,12 @@ body {
 }
 
 .logo-symbol {
-    width: 60px;
-    height: 120px;
+    width: 45px;
+    height: 90px;
     position: relative;
     margin-bottom: 1rem;
     border: 2px solid var(--primary-color);
-    border-radius: 30px;
+    border-radius: 22px;
     background: var(--bg-color);
     display: flex;
     align-items: center;
@@ -79,16 +141,41 @@ body {
 .logo-symbol::before {
     content: '';
     position: absolute;
-    width: 30px;
-    height: 2px;
+    width: 20px;
+    height: 20px;
     background: var(--primary-color);
-    border-radius: 2px;
-    animation: wave 2s ease-in-out infinite;
+    animation: morphShapes 8s ease-in-out infinite;
+    transform-origin: center;
 }
 
-@keyframes wave {
-    0%, 100% { transform: translateY(0) scaleX(1); }
-    50% { transform: translateY(-5px) scaleX(0.8); }
+@keyframes morphShapes {
+    0%, 100% {
+        /* Triangle */
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        transform: scale(0.8);
+    }
+    25% {
+        /* Square */
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        transform: scale(0.7);
+    }
+    50% {
+        /* Smiling face (circle with smile) */
+        clip-path: circle(50% at 50% 50%);
+        transform: scale(0.9);
+        border-radius: 50%;
+        box-shadow: 
+            inset -3px -8px 0 -6px var(--bg-color),
+            inset 3px -8px 0 -6px var(--bg-color),
+            inset 0 -5px 0 -3px var(--bg-color);
+    }
+    75% {
+        /* Padlock */
+        clip-path: polygon(20% 40%, 20% 20%, 80% 20%, 80% 40%, 90% 40%, 90% 100%, 10% 100%, 10% 40%);
+        transform: scale(0.8);
+        border-radius: 0;
+        box-shadow: none;
+    }
 }
 
 .logo h1 {
@@ -139,7 +226,7 @@ body {
     font-size: 1rem;
     font-family: inherit;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -190,6 +277,7 @@ body {
     padding: 1rem 2rem;
     background: var(--surface-color);
     border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
 }
 
 .header-left h2 {
@@ -248,6 +336,7 @@ body {
     background: var(--surface-color);
     border-right: 1px solid var(--border-color);
     padding: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .sidebar h3 {
@@ -349,6 +438,7 @@ body {
     background: var(--surface-color);
     border-top: 1px solid var(--border-color);
     gap: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 #message-input {
@@ -360,7 +450,7 @@ body {
     color: var(--text-color);
     font-family: inherit;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background-color 0.3s ease, color 0.3s ease;
 }
 
 #message-input:focus {

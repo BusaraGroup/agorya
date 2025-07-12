@@ -15,6 +15,7 @@ class ArgoyaMessenger {
 
     init() {
         this.setupEventListeners();
+        this.initializeDarkMode();
         this.showScreen('login');
     }
 
@@ -33,6 +34,11 @@ class ArgoyaMessenger {
 
         // Leave button
         document.getElementById('leave-btn').addEventListener('click', () => this.leaveService());
+
+        // Dark mode toggle
+        document.getElementById('dark-mode-switch').addEventListener('change', (e) => {
+            this.toggleDarkMode(e.target.checked);
+        });
 
         // Cleanup on page unload
         window.addEventListener('beforeunload', () => this.cleanup());
@@ -329,6 +335,29 @@ class ArgoyaMessenger {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    initializeDarkMode() {
+        // Check for saved theme preference or default to light mode
+        const savedTheme = localStorage.getItem('argoya-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+        
+        if (shouldUseDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('dark-mode-switch').checked = true;
+        }
+    }
+
+    toggleDarkMode(isDark) {
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('argoya-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('argoya-theme', 'light');
+        }
     }
 }
 
