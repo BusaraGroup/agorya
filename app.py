@@ -252,10 +252,10 @@ if __name__ == '__main__':
     os.makedirs('templates', exist_ok=True)
     os.makedirs('static', exist_ok=True)
     
-    print("🚀 Argoya Nostr Messenger starting...")
-    print("📱 Anonymous, encrypted messaging service")
-    print("🔐 End-to-end encryption enabled")
-    print("🗑️  Session-based data deletion active")
-    print("🌐 Visit: http://localhost:5000")
+    print("ARGOYA - Nostr Messenger starting...")
+    print("Anonymous, encrypted messaging service")
+    print("End-to-end encryption enabled")
+    print("Session-based data deletion active")
+    print("Visit: http://localhost:5001")
     
-    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+    socketio.run(app, debug=True, host='0.0.0.0', port=5001)

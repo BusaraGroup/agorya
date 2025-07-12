@@ -1,18 +1,18 @@
-/* Argoya - Anonymous Nostr Messenger Styles */
+/* Argoya - Minimal Black and White Messenger Styles */
 
 :root {
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
-    --accent-color: #3b82f6;
-    --bg-color: #0f172a;
-    --surface-color: #1e293b;
-    --text-color: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --border-color: #334155;
-    --success-color: #10b981;
-    --warning-color: #f59e0b;
-    --error-color: #ef4444;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --primary-color: #000000;
+    --secondary-color: #333333;
+    --accent-color: #666666;
+    --bg-color: #ffffff;
+    --surface-color: #f5f5f5;
+    --text-color: #000000;
+    --text-secondary: #666666;
+    --border-color: #cccccc;
+    --success-color: #000000;
+    --warning-color: #000000;
+    --error-color: #000000;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -22,12 +22,14 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Courier New', monospace;
     background: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
     height: 100vh;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .screen {
@@ -44,7 +46,7 @@ body {
 #login-screen {
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--bg-color) 0%, var(--surface-color) 100%);
+    background: var(--bg-color);
 }
 
 .login-container {
@@ -54,30 +56,71 @@ body {
     padding: 2rem;
 }
 
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo-symbol {
+    width: 60px;
+    height: 120px;
+    position: relative;
+    margin-bottom: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-symbol::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateY(0) scaleX(1); }
+    50% { transform: translateY(-5px) scaleX(0.8); }
+}
+
 .logo h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    margin: 0;
     color: var(--primary-color);
+    font-weight: normal;
+    letter-spacing: 2px;
 }
 
 .logo p {
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .login-form {
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 }
 
 .login-form input {
     width: 100%;
-    padding: 1rem;
+    padding: 0.8rem;
     margin-bottom: 1rem;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    background: var(--bg-color);
     color: var(--text-color);
     font-size: 1rem;
+    font-family: inherit;
     outline: none;
     transition: border-color 0.3s;
 }
@@ -88,15 +131,17 @@ body {
 
 .login-form button {
     width: 100%;
-    padding: 1rem;
+    padding: 0.8rem;
     background: var(--primary-color);
-    color: white;
+    color: var(--bg-color);
     border: none;
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 1rem;
-    font-weight: 600;
+    font-family: inherit;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .login-form button:hover {
@@ -106,7 +151,7 @@ body {
 .features {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 0.5rem;
     margin-top: 2rem;
 }
 
@@ -115,13 +160,16 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
-    font-size: 0.9rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .feature .icon {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
 /* Chat Screen */
@@ -146,12 +194,17 @@ body {
 
 .header-left h2 {
     color: var(--primary-color);
-    margin-bottom: 0.25rem;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    letter-spacing: 2px;
 }
 
 .header-left span {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .header-right {
@@ -161,23 +214,27 @@ body {
 }
 
 #online-count {
-    color: var(--success-color);
-    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #leave-btn {
     padding: 0.5rem 1rem;
-    background: var(--error-color);
-    color: white;
+    background: var(--primary-color);
+    color: var(--bg-color);
     border: none;
-    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
 }
 
 #leave-btn:hover {
-    opacity: 0.8;
+    background: var(--secondary-color);
 }
 
 .chat-main {
@@ -196,16 +253,17 @@ body {
 .sidebar h3 {
     margin-bottom: 1rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-weight: normal;
 }
 
 .user-item {
     padding: 0.5rem;
     margin-bottom: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
     font-size: 0.9rem;
     display: flex;
     align-items: center;
@@ -214,16 +272,19 @@ body {
 
 .user-item.me {
     background: var(--primary-color);
-    color: white;
+    color: var(--bg-color);
+    border-color: var(--primary-color);
 }
 
 .user-item::before {
-    content: "👤";
+    content: "•";
     font-size: 1rem;
+    color: var(--text-secondary);
 }
 
 .user-item.me::before {
-    content: "🔐";
+    content: "■";
+    color: var(--bg-color);
 }
 
 .chat-area {
@@ -243,15 +304,14 @@ body {
     margin-bottom: 1rem;
     padding: 1rem;
     background: var(--surface-color);
-    border-radius: 8px;
-    border-left: 4px solid var(--border-color);
+    border-left: 2px solid var(--border-color);
     animation: messageSlideIn 0.3s ease-out;
 }
 
 .message.own {
     background: var(--primary-color);
-    color: white;
-    border-left-color: var(--secondary-color);
+    color: var(--bg-color);
+    border-left-color: var(--primary-color);
     margin-left: 2rem;
 }
 
@@ -268,12 +328,14 @@ body {
 }
 
 .message-time {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .message.own .message-time {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .message-content {
@@ -292,10 +354,11 @@ body {
 #message-input {
     flex: 1;
     padding: 0.75rem;
-    border: 2px solid var(--border-color);
-    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 0;
     background: var(--bg-color);
     color: var(--text-color);
+    font-family: inherit;
     outline: none;
     transition: border-color 0.3s;
 }
@@ -307,11 +370,13 @@ body {
 #send-btn {
     padding: 0.75rem 1.5rem;
     background: var(--primary-color);
-    color: white;
+    color: var(--bg-color);
     border: none;
-    border-radius: 6px;
     cursor: pointer;
-    font-weight: 600;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
     transition: background-color 0.3s;
 }
 
@@ -336,10 +401,10 @@ body {
 }
 
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--border-color);
-    border-top: 4px solid var(--primary-color);
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--primary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto 1rem;
@@ -389,16 +454,15 @@ body {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-color);
+    background: var(--surface-color);
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--border-color);
-    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

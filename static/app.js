@@ -318,13 +318,11 @@ class ArgoyaMessenger {
     }
 
     showError(message) {
-        // Simple error display - can be enhanced with a proper toast system
-        alert(`❌ ${message}`);
+        alert(`ERROR: ${message}`);
     }
 
     showSuccess(message) {
-        // Simple success display - can be enhanced with a proper toast system
-        console.log(`✅ ${message}`);
+        console.log(`SUCCESS: ${message}`);
     }
 
     escapeHtml(text) {
