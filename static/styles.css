@@ -40,6 +40,11 @@
     box-sizing: border-box;
 }
 
+/* Global transition for smooth theme switching */
+*, *::before, *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 body {
     font-family: 'Courier New', monospace;
     background: var(--bg-color);
@@ -73,6 +78,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    user-select: none;
 }
 
 .toggle-slider {
@@ -84,6 +90,7 @@ body {
     background: var(--toggle-slider);
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease;
+    pointer-events: none;
 }
 
 .toggle-switch:checked + .toggle-label .toggle-slider {
@@ -92,6 +99,10 @@ body {
 
 .toggle-label:hover {
     opacity: 0.8;
+}
+
+.toggle-label:active {
+    transform: scale(0.95);
 }
 
 .screen {

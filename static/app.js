@@ -35,9 +35,11 @@ class ArgoyaMessenger {
         // Leave button
         document.getElementById('leave-btn').addEventListener('click', () => this.leaveService());
 
-        // Dark mode toggle
-        document.getElementById('dark-mode-switch').addEventListener('change', (e) => {
-            this.toggleDarkMode(e.target.checked);
+        // Dark mode toggle - use event delegation to handle timing issues
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'dark-mode-switch') {
+                this.toggleDarkMode(e.target.checked);
+            }
         });
 
         // Cleanup on page unload
@@ -344,13 +346,23 @@ class ArgoyaMessenger {
         
         const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
         
+        // Ensure theme is set (might already be set by early initialization)
         if (shouldUseDark) {
             document.documentElement.setAttribute('data-theme', 'dark');
-            document.getElementById('dark-mode-switch').checked = true;
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+        
+        // Set switch state
+        const switchElement = document.getElementById('dark-mode-switch');
+        if (switchElement) {
+            switchElement.checked = shouldUseDark;
         }
     }
 
     toggleDarkMode(isDark) {
+        console.log('Dark mode toggled:', isDark); // Debug log
+        
         if (isDark) {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('argoya-theme', 'dark');
@@ -358,13 +370,32 @@ class ArgoyaMessenger {
             document.documentElement.removeAttribute('data-theme');
             localStorage.setItem('argoya-theme', 'light');
         }
+        
+        // Force a repaint to ensure the change is visible
+        document.body.offsetHeight;
     }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize dark mode first
+    initializeDarkModeEarly();
+    
+    // Then initialize the messenger
     window.argoyaMessenger = new ArgoyaMessenger();
 });
+
+// Early dark mode initialization to prevent flash
+function initializeDarkModeEarly() {
+    const savedTheme = localStorage.getItem('argoya-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    
+    if (shouldUseDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+}
 
 // Security: Prevent right-click context menu and dev tools
 document.addEventListener('contextmenu', (e) => {
