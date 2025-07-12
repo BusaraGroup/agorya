@@ -1,12 +1,12 @@
 {
   "name": "argoya",
   "version": "1.0.0",
-  "description": "Argoya - A software service built on Nostr protocol",
-  "main": "index.js",
+  "description": "Argoya - Anonymous end-to-end encrypted Nostr messaging service",
+  "main": "app.py",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "python app.py",
+    "dev": "python app.py",
+    "install": "pip install -r requirements.txt"
   },
   "repository": {
     "type": "git",
@@ -15,8 +15,10 @@
   "keywords": [
     "argoya",
     "nostr",
-    "decentralized",
-    "protocol"
+    "encryption",
+    "anonymous",
+    "messaging",
+    "privacy"
   ],
   "author": "BusaraGroup",
   "license": "MIT"
